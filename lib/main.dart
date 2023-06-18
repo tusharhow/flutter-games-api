@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'app/controllers/game_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_games_api/app/blocs/game_bloc.dart';
 import 'app/views/game_screen.dart';
 
 void main() {
@@ -13,13 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => GameController()),
-      ],
+    return BlocProvider(
+      create: (context) => GameBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Games Catalog',
         theme: ThemeData(
           useMaterial3: true,
           primarySwatch: Colors.blue,

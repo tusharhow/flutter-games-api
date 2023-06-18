@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_games_api/app/constants.dart';
 import '../models/game_model.dart';
 
-// ignore: must_be_immutable
 class CharacterTile extends StatelessWidget {
-  CharacterTile({
+  const CharacterTile({
     Key? key,
-    required this.games,
+    required this.game,
     required this.onTap,
   }) : super(key: key);
 
-  final Games games;
-  VoidCallback onTap;
+  final Games game;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +26,13 @@ class CharacterTile extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
-                  imageUrl: games.thumbnail!,
+                  imageUrl: game.thumbnail!,
                   height: 70,
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(
                     color: Color(0xFF2c3e50),
                   )),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               const SizedBox(width: 10),
@@ -42,7 +40,7 @@ class CharacterTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    games.title!,
+                    game.title!,
                     maxLines: 2,
                     style: const TextStyle(
                         fontWeight: FontWeight.w800, fontSize: kDefaultPadding),
@@ -50,7 +48,7 @@ class CharacterTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    games.genre.toString(),
+                    game.genre!,
                     style: const TextStyle(fontSize: 13, color: Colors.black54),
                     maxLines: 2,
                   ),
